@@ -67,6 +67,7 @@ function printData(data) {
                     printer.bold(true);
                     printer.println("veg restuarent");
                     printer.println("Nh service road, Melmaruvathur - 603319 ");
+                    printer.println("contact - 9965258727");
                     printer.bold(false);
                     printer.setTextNormal();
                     printer.drawLine();
