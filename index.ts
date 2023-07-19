@@ -64,9 +64,9 @@ async function printData(data:datatoprint) {
           { text: (orderItem.quantity * orderItem.price).toString(), align: 'CENTER', width: 0.25 }
         ]);
       });
-  
+    // added a comment
       printer.drawLine();
-      printer.alignRight();
+      printer.alignRight(); 
       printer.bold(true);
       printer.println(`Total: ${data.total}`);
       printer.bold(false);

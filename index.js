@@ -93,6 +93,7 @@ function printData(data) {
                             { text: (orderItem.quantity * orderItem.price).toString(), align: 'CENTER', width: 0.25 }
                         ]);
                     });
+                    // added a comment
                     printer.drawLine();
                     printer.alignRight();
                     printer.bold(true);
