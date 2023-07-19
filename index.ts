@@ -27,9 +27,18 @@ interface datatoprint{
 async function printData(data:datatoprint) {
     try {
       printer.alignCenter();
+     
       printer.bold(true);
-      printer.println("Order Receipt");
+      printer.setTextSize(1,0);  
+      printer.underlineThick(true);  
+      printer.println("Sri Saravana");
+      printer.setTextNormal();
+      printer.underlineThick(false);
+      printer.bold(true);
+      printer.println("veg restuarent")
+      printer.println("Nh service road, Melmaruvathur - 603319 ")
       printer.bold(false);
+      printer.setTextNormal(); 
       printer.drawLine();
       printer.alignLeft();
       printer.tableCustom([

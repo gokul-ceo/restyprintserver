@@ -59,8 +59,16 @@ function printData(data) {
                     _a.trys.push([0, 2, 3, 4]);
                     printer.alignCenter();
                     printer.bold(true);
-                    printer.println("Order Receipt");
+                    printer.setTextSize(1, 0);
+                    printer.underlineThick(true);
+                    printer.println("Sri Saravana");
+                    printer.setTextNormal();
+                    printer.underlineThick(false);
+                    printer.bold(true);
+                    printer.println("veg restuarent");
+                    printer.println("Nh service road, Melmaruvathur - 603319 ");
                     printer.bold(false);
+                    printer.setTextNormal();
                     printer.drawLine();
                     printer.alignLeft();
                     printer.tableCustom([
