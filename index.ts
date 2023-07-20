@@ -1,5 +1,3 @@
-
-import * as fs from 'fs';
 import { Server } from "socket.io";
 import { createServer } from 'http';
 var mqtt = require('mqtt')

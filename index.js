@@ -46,8 +46,7 @@ var options = {
     port: 8883,
     protocol: 'mqtts',
     username: 'restyagent',
-    password: 'Restyagentv0'
-    // password: process.env.pwd
+    password: process.env.pwd
 };
 var app = express();
 app.use(cors());
