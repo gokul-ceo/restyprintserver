@@ -1,21 +1,41 @@
-import * as https from 'https';
+
 import * as fs from 'fs';
 import { Server } from "socket.io";
-import { createServer } from 'https';
-
+import { createServer } from 'http';
+var mqtt = require('mqtt')
 const express = require('express');
 const cors = require('cors');
 
+var options = {
+  host: '6fcf49037ef74eafbc9efc59f8b0c06d.s1.eu.hivemq.cloud',
+  port: 8883,
+  protocol: 'mqtts',
+  username: 'restyagent',
+  password: process.env.pwd
+}
 
 const app = express();
 
 app.use(cors())
-const options = {
-  key: fs.readFileSync('/home/restyagent/private.key'),
-  cert: fs.readFileSync('/home/restyagent/server.crt'),
-};
-const httpserver = createServer(options,app)
+
+const httpserver = createServer()
 const io = new Server(httpserver)
+var client = mqtt.connect(options);
+client.on('connect', function () {
+  console.log('Connected to mqtt server');
+});
+
+client.on('error', function (error: any) {
+  console.log(error);
+});
+client.subscribe('orderdata/resty');
+
+client.on('message', function (topic: any, message: any) {
+  console.log(JSON.parse(message));
+  printData(JSON.parse(message))
+
+});
+
 
 const ThermalPrinter = require("node-thermal-printer").printer;
 const PrinterTypes = require("node-thermal-printer").types;

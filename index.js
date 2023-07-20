@@ -36,19 +36,35 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var fs = require("fs");
 var socket_io_1 = require("socket.io");
-var https_1 = require("https");
+var http_1 = require("http");
+var mqtt = require('mqtt');
 var express = require('express');
 var cors = require('cors');
+var options = {
+    host: '6fcf49037ef74eafbc9efc59f8b0c06d.s1.eu.hivemq.cloud',
+    port: 8883,
+    protocol: 'mqtts',
+    username: 'restyagent',
+    password: 'Restyagentv0'
+    // password: process.env.pwd
+};
 var app = express();
 app.use(cors());
-var options = {
-    key: fs.readFileSync('/home/restyagent/private.key'),
-    cert: fs.readFileSync('/home/restyagent/server.crt'),
-};
-var httpserver = (0, https_1.createServer)(options, app);
+var httpserver = (0, http_1.createServer)();
 var io = new socket_io_1.Server(httpserver);
+var client = mqtt.connect(options);
+client.on('connect', function () {
+    console.log('Connected to mqtt server');
+});
+client.on('error', function (error) {
+    console.log(error);
+});
+client.subscribe('orderdata/resty');
+client.on('message', function (topic, message) {
+    console.log(JSON.parse(message));
+    printData(JSON.parse(message));
+});
 var ThermalPrinter = require("node-thermal-printer").printer;
 var PrinterTypes = require("node-thermal-printer").types;
 var printer = new ThermalPrinter({
