@@ -1,14 +1,21 @@
-import { createServer } from "http";
-
+import * as https from 'https';
+import * as fs from 'fs';
 import { Server } from "socket.io";
-const httpserver = createServer()
-const io = new Server(httpserver)
+import { createServer } from 'https';
+
 const express = require('express');
 const cors = require('cors');
 
 
 const app = express();
+
 app.use(cors())
+const options = {
+  key: fs.readFileSync('/home/restyagent/private.key'),
+  cert: fs.readFileSync('/home/restyagent/server.crt'),
+};
+const httpserver = createServer(options,app)
+const io = new Server(httpserver)
 
 const ThermalPrinter = require("node-thermal-printer").printer;
 const PrinterTypes = require("node-thermal-printer").types;

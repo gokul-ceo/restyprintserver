@@ -36,14 +36,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var http_1 = require("http");
+var fs = require("fs");
 var socket_io_1 = require("socket.io");
-var httpserver = (0, http_1.createServer)();
-var io = new socket_io_1.Server(httpserver);
+var https_1 = require("https");
 var express = require('express');
 var cors = require('cors');
 var app = express();
 app.use(cors());
+var options = {
+    key: fs.readFileSync('/home/restyagent/private.key'),
+    cert: fs.readFileSync('/home/restyagent/server.crt'),
+};
+var httpserver = (0, https_1.createServer)(options, app);
+var io = new socket_io_1.Server(httpserver);
 var ThermalPrinter = require("node-thermal-printer").printer;
 var PrinterTypes = require("node-thermal-printer").types;
 var printer = new ThermalPrinter({
