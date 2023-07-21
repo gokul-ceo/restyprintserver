@@ -9,7 +9,7 @@ var options = {
   port: 8883,
   protocol: 'mqtts',
   username: 'restyagent',
-  password: process.env.pwd
+  password: "Restyagentv0"
 }
 
 const app = express();
