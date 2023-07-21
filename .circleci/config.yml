@@ -1,8 +1,8 @@
 version: 2.1
 workflows:
-  testing:
+  deployment:
     jobs:
-      - printer-config:
+      - setup-printer:
            context:
               - Mqtt credentails
 jobs:
@@ -16,12 +16,6 @@ jobs:
           name: Copy project to home
           command: |
             sudo cp -r . /home/restyagent/
-      - run:
-          name: changing to root directory
-          command: |
-            sudo -i
-            echo $pwd
-       
       - run:
           name: Change to project directory
           command: |
