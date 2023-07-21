@@ -20,10 +20,6 @@ jobs:
           name: changing to root directory
           command: |
             sudo -i
-       
-      - run:
-          name: authenticating
-          command: |
             echo $pwd
        
       - run:
