@@ -1,8 +1,10 @@
 version: 2.1
 workflows:
-  testing:
+  deployment:
     jobs:
-      - printer-config
+      - setup-printer:
+           context:
+              - Mqtt credentails
 jobs:
   printer-config:
     machine: true
@@ -15,12 +17,15 @@ jobs:
           command: |
             sudo cp -r . /home/restyagent/
       - run:
-          name: Change ownership and permissions
+          name: changing to root directory
           command: |
-            sudo chown -R restyagent:restyagent /home/restyagent/restyprintserver
-            find /home/restyagent/restyprintserver -type d -exec chmod 755 {} \;
-            find /home/restyagent/restyprintserver -type f -exec chmod 644 {} \;
-
+            sudo -i
+       
+      - run:
+          name: authenticating
+          command: |
+            echo $pwd
+       
       - run:
           name: Change to project directory
           command: |
